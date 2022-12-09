@@ -2,14 +2,14 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import App from './App'
-import { MysteryContextProvider } from './contexts/MysteryContext'
+import { PhotosContextProvider } from './contexts/PhotosContext'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <BrowserRouter>
-      <MysteryContextProvider>
-        <App />
-      </MysteryContextProvider>  
-    </BrowserRouter>
+    <PhotosContextProvider>
+      <BrowserRouter>
+        <App />  
+      </BrowserRouter>
+    </PhotosContextProvider>
   </React.StrictMode>
 )
