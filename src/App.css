@@ -56,6 +56,21 @@ main {
     grid-row: span 2;
 }
 
+.image-container {
+    position: relative;
+}
+
+.image-container .ri-heart-line {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+}
+.image-container .ri-add-circle-line {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+}
+
 img {
     object-fit: cover;
     width: 100%;
