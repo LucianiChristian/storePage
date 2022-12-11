@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { PhotosContext } from '../contexts/PhotosContext';
 
 export default function Image({className, img}) {
@@ -10,8 +11,8 @@ export default function Image({className, img}) {
     }
 
     const heartType = img.isFavorite ? "fill" : "line";
-    const heartHovered = hovered && 
-        <i className={`ri-heart-${heartType} favorite`} onClick={() => toggleFavorite(img.id)}></i>;
+    const heartHovered = hovered && <i className={`ri-heart-${heartType} favorite`} onClick={() => toggleFavorite(img.id)}></i>;
+
     const cartHovered = hovered && <i className="ri-add-circle-line cart"></i>;  
 
     return (
@@ -22,3 +23,12 @@ export default function Image({className, img}) {
         </div>
     )
 }
+
+Image.propTypes = {
+    className: PropTypes.string,
+    img: PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        url: PropTypes.string.isRequired,
+        isFavorite: PropTypes.bool,
+    }),
+};
