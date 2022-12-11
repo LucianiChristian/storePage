@@ -1,25 +1,56 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { PhotosContext } from '../contexts/PhotosContext';
+import { Context } from '../Context';
 
 export default function Image({className, img}) {
     const [hovered, setHovered] = React.useState(false);
-    const { toggleFavorite } = React.useContext(PhotosContext);
+    const { toggleFavorite, cartItems, addCartItem } = React.useContext(Context);
 
     function handleHover() {
         setHovered(prevState => !prevState);
     }
 
-    const heartType = img.isFavorite ? "fill" : "line";
-    const heartHovered = hovered && <i className={`ri-heart-${heartType} favorite`} onClick={() => toggleFavorite(img.id)}></i>;
+    function heartIcon() {
+        if(img.isFavorite) {
+            return (
+                <i 
+                    className={`ri-heart-fill favorite`} 
+                    onClick={() => toggleFavorite(img.id)}
+                ></i>
+            )   
+        }
+        else if(hovered) {
+            return (
+                <i 
+                    className={`ri-heart-line favorite`} 
+                    onClick={() => toggleFavorite(img.id)}
+                ></i>
+            )
+        }
+    }
+    function cartIcon() {
+        const inCart = cartItems.some(item => item.id === img.id);
 
-    const cartHovered = hovered && <i className="ri-add-circle-line cart"></i>;  
+        if(inCart) {
+            return (
+                <i className={`ri-shopping-cart-fill cart`}></i>
+            )   
+        }
+        else if(hovered) {
+            return (
+                <i 
+                    className="ri-add-circle-line cart" 
+                    onClick={() => addCartItem(img)}
+                ></i>
+            )
+        }
+    } 
 
     return (
         <div className={`${className} image-container` } onMouseLeave={handleHover} onMouseEnter={handleHover}>
             <img className="image-grid" src={img.url} />
-            {heartHovered}
-            {cartHovered}
+            {heartIcon()}
+            {cartIcon()}
         </div>
     )
 }

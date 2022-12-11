@@ -1,15 +1,21 @@
 import { createContext, useEffect, useState } from 'react';
 
-const PhotosContext = createContext();
+const Context = createContext();
 
-function PhotosContextProvider({children}) {
-    const [photos, setPhotos] = useState([]);
-
+function ContextProvider({children}) {
+    const [photos, setPhotos] = useState([]);    
     function toggleFavorite(id) {
         setPhotos(prevPhotos => prevPhotos.map(photo => {
             return photo.id === id ? {...photo, isFavorite: !photo.isFavorite} : photo
         }));
     }
+    
+    const [cartItems, setCartItems] = useState([]);
+    function addCartItem(item) {
+        setCartItems(prevCartItems => [...prevCartItems, item]);
+    }
+
+    console.log(cartItems);
 
     useEffect(() => {
         fetch("https://raw.githubusercontent.com/bobziroll/scrimba-react-bootcamp-images/master/images.json")
@@ -18,10 +24,10 @@ function PhotosContextProvider({children}) {
     }, []);
 
     return (
-        <PhotosContext.Provider value={{photos, toggleFavorite}}>
+        <Context.Provider value={{photos, toggleFavorite, cartItems, addCartItem}}>
             {children}
-        </PhotosContext.Provider> 
+        </Context.Provider> 
     )
 }
 
-export { PhotosContextProvider, PhotosContext }
+export { ContextProvider, Context }
