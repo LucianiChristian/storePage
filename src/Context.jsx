@@ -14,8 +14,9 @@ function ContextProvider({children}) {
     function addCartItem(item) {
         setCartItems(prevCartItems => [...prevCartItems, item]);
     }
-
-    console.log(cartItems);
+    function removeCartItem(id) {
+        setCartItems(prevCartItems => prevCartItems.filter(cartItem => !(id === cartItem.id)));
+    }
 
     useEffect(() => {
         fetch("https://raw.githubusercontent.com/bobziroll/scrimba-react-bootcamp-images/master/images.json")
@@ -24,7 +25,7 @@ function ContextProvider({children}) {
     }, []);
 
     return (
-        <Context.Provider value={{photos, toggleFavorite, cartItems, addCartItem}}>
+        <Context.Provider value={{photos, toggleFavorite, cartItems, addCartItem, removeCartItem}}>
             {children}
         </Context.Provider> 
     )

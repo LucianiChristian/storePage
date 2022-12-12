@@ -4,7 +4,7 @@ import { Context } from '../Context';
 
 export default function Image({className, img}) {
     const [hovered, setHovered] = React.useState(false);
-    const { toggleFavorite, cartItems, addCartItem } = React.useContext(Context);
+    const { toggleFavorite, cartItems, addCartItem, removeCartItem } = React.useContext(Context);
 
     function handleHover() {
         setHovered(prevState => !prevState);
@@ -33,7 +33,10 @@ export default function Image({className, img}) {
 
         if(inCart) {
             return (
-                <i className={`ri-shopping-cart-fill cart`}></i>
+                <i 
+                    className={`ri-shopping-cart-fill cart`}
+                    onClick={() => removeCartItem(img.id)}
+                ></i>
             )   
         }
         else if(hovered) {
