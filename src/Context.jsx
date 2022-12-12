@@ -18,6 +18,12 @@ function ContextProvider({children}) {
         setCartItems(prevCartItems => prevCartItems.filter(cartItem => !(id === cartItem.id)));
     }
 
+    const [cartTotal, setCartTotal] = useState(0);
+    const ITEM_PRICE = 5;
+    useEffect(() => {
+        setCartTotal(ITEM_PRICE * cartItems.length);
+    }, [cartItems]);
+
     useEffect(() => {
         fetch("https://raw.githubusercontent.com/bobziroll/scrimba-react-bootcamp-images/master/images.json")
             .then(response => response.json())
@@ -25,7 +31,7 @@ function ContextProvider({children}) {
     }, []);
 
     return (
-        <Context.Provider value={{photos, toggleFavorite, cartItems, addCartItem, removeCartItem}}>
+        <Context.Provider value={{photos, toggleFavorite, cartItems, addCartItem, removeCartItem, cartTotal}}>
             {children}
         </Context.Provider> 
     )

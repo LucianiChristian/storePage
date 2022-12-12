@@ -28,6 +28,12 @@ i, button {
     cursor: pointer;
 }
 
+button {
+    font-family: inherit;
+    letter-spacing: 2px;
+    font-weight: bold;
+}
+
 header {
     display: flex;
     justify-content: space-between;
@@ -81,6 +87,12 @@ img {
     height: 100%;
 }
 
+.cartPage {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
 .cartPage > h1 {
     text-align: center;
 }
@@ -121,6 +133,11 @@ img {
 }
 .cartItem-price {
     font-size: 1.5rem;
+}
+.cartItem-iconImageContainer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 .cartItem .ri-delete-bin-line {
     font-size: 1.3rem;
