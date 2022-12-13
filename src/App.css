@@ -131,6 +131,8 @@ img {
 }
 .cartItem-image {
     width: 150px;
+    height: 150px;
+    object-fit: cover;
 }
 .cartItem-price {
     font-size: 1.2rem;
@@ -140,6 +142,6 @@ img {
     align-items: center;
     gap: 10px;
 }
-.cartItem .ri-delete-bin-line {
+.cartItem [class^=ri-delete-bin] {
     font-size: 1.3rem;
 }
