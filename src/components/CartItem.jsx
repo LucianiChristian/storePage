@@ -1,20 +1,19 @@
+import PropTypes from "prop-types";
 import { useContext, useState } from "react";
 import { Context } from "../Context";
+import useHover from "../hooks/useHover";
 
-export default function CartItem({item}) {
+function CartItem({item}) {
     const { removeCartItem } = useContext(Context);
 
-    const [deleteIconHover, setDeleteIconHover] = useState(false);
-    const deleteIconType = deleteIconHover ? "fill" : "line";
+    const [ hovered, hoveredRef ] = useHover();
+
+    const deleteIconType = hovered ? "fill" : "line";
 
     return (
         <div className="cartItem">
             <div className="cartItem-iconImageContainer">
-                <div 
-                    className="deleteIconContainer"
-                    onMouseEnter={() => setDeleteIconHover(true)}
-                    onMouseLeave={() => setDeleteIconHover(false)}
-                >
+                <div className="deleteIconContainer" ref={hoveredRef}>
                     <i className={`ri-delete-bin-${deleteIconType}`} onClick={() => removeCartItem(item.id)}></i>
                 </div>
                 <img className="cartItem-image" src={item.url}/>
@@ -23,3 +22,11 @@ export default function CartItem({item}) {
         </div>
     )
 }
+
+CartItem.proptypes = {
+    item: PropTypes.shape({
+        url: PropTypes.string.isRequired,
+    }),
+};
+
+export default CartItem;
